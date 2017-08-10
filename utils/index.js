@@ -26,21 +26,12 @@ exports.getFromGumtree = async () => {
       if (url) {
         const ad = url && await scrapeIt(`https://www.gumtree.pl${url}`, {
           title: 'span.myAdTitle',
-          created_at: {
-            selector: '.selMenu .attribute > .value',
-            eq: 0
-          },
+          created_at: '.selMenu .attribute > .name:contains("Data dodania") + span',
           locations: {
             listItem: '.selMenu .attribute > .value > .location > a',
           },
-          by: {
-            selector: '.selMenu .attribute > .value',
-            eq: 2
-          },
-          size: {
-            selector: '.selMenu .attribute > .value',
-            eq: 6
-          },
+          by: '.selMenu .attribute > .name:contains("Na sprzedaż przez") + span',
+          size: '.selMenu .attribute > .name:contains("Wielkość (m2)") + span',
           price: {
             selector: '.price .value .amount',
             eq: 0
