@@ -22,7 +22,4 @@ exports.payload = (req, res) => {
 
 	// and npm install with --production
 	exec('npm -C ~/Public/real-estate install --production', execCallback)
-
-	// and run tsc
-	exec('tsc', execCallback)
 }
