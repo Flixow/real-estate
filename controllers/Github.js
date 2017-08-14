@@ -14,6 +14,8 @@ exports.payload = (req, res) => {
     exec('git -C ~/Public/real-estate clean -df', execCallback)
     exec('git -C ~/Public/real-estate pull -f', execCallback)
     exec('yarn -C ~/Public/real-estate install --prod', execCallback)
+    console.log('Installing production dependencies')
     exec('yarn -C ~/Public/real-estate install start', execCallback)
+    console.log('Installed production dependencies')
   }
 }
