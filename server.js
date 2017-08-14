@@ -13,6 +13,11 @@ app.get('/', (req, res) => {
   res.send('It works!')
 })
 app.get('/scrape', adsController.get)
+
+app.get('/payload', (req, res) => {
+  res.sendStatus(200)
+  console.log('get /payload')
+});
 app.post('/payload', githubController.payload)
 
 
