@@ -53,7 +53,7 @@ class Gumtree {
     return url
   }
 
-  async getAdsUrl(pages = 5) {
+  async getAdsUrl(pages) {
     const allUrls = []
 
     await Promise.all([...Array(Number(pages))].map(async (k, i) => {
@@ -74,17 +74,21 @@ class Gumtree {
     return allUrls
   }
 
-  async getAds(pages) {
+  async getAds(pages = 1) {
     const urls = await this.getAdsUrl(pages)
     const ads = await Promise.all(urls.map(async (url, i) => {
-      if (url) {
-        const ad = await scrapeIt(`https://www.gumtree.pl${url}`, this.scrapeSelectors)
+      return await new Promise((resolve, reject) => {
+        setTimeout(async () => {
+          if (url) {
+            const ad = await scrapeIt(`https://www.gumtree.pl${url}`, this.scrapeSelectors)
 
-        ad.url = `https://www.gumtree.pl${url}`
-        ad.street = await this.geocoder.getStreet(ad.cords)
+            ad.url = `https://www.gumtree.pl${url}`
+            ad.street = await this.geocoder.getStreet(ad.cords)
 
-        return ad
-      }
+            resolve(ad)
+          }
+        }, 200 * i)
+      })
     }))
 
     console.log('ads length:', ads.length)
