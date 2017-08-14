@@ -1,16 +1,24 @@
 const express = require('express')
-const request = require('request')
+const bodyParser = require('body-parser')
 const app = express()
 
 const scrapeIt = require('scrape-it')
 const adsController = require('./controllers/Ads')
+const githubController = require('./controllers/Github')
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+app.get('/', (req, res) => {
+  res.send('It works!')
+})
+app.get('/scrape', adsController.get)
+app.post('/payload', githubController.payload)
+
 
 
 const GumtreeService = require('./services/Gumtree')
-
-app.get('/scrape', adsController.get)
 app.get('/devTest', async (req, res) => {
-  console.log(GumtreeService)
   const test = new GumtreeService()
 
   res.send(await test.getAdsUrl())
