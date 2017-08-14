@@ -1,9 +1,10 @@
 const exec = require('child_process').exec
 
 exports.payload = (req, res) => {
-  if (res.body.ref.includes('master')) {
-    console.log(req.body.pusher.name + ' just pushed to ' + req.body.repository.name)
-    console.log('pulling code from GitHub...', req.body)
+  const branch = res.body.ref.split('/')[2]
+  if (branch === 'master') {
+    console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
+    console.log('pulling code from GitHub...')
 
     const execCallback = (err, stdout, stderr) => {
       if(stdout) console.log(stdout)
@@ -17,5 +18,7 @@ exports.payload = (req, res) => {
     console.log('Installing production dependencies')
     exec('yarn -C ~/Public/real-estate install start', execCallback)
     console.log('Installed production dependencies')
+  } else {
+    console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
   }
 }
