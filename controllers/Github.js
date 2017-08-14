@@ -3,7 +3,7 @@ const exec = require('child_process').exec
 exports.payload = (req, res) => {
   if (res.body.ref.includes('master')) {
     console.log(req.body.pusher.name + ' just pushed to ' + req.body.repository.name)
-    console.log('pulling code from GitHub...')
+    console.log('pulling code from GitHub...', req.body)
 
     const execCallback = (err, stdout, stderr) => {
       if(stdout) console.log(stdout)
