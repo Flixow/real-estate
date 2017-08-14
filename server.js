@@ -12,12 +12,13 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.send('It works!')
 })
+
 app.get('/scrape', adsController.get)
 
 app.get('/payload', (req, res) => {
   res.sendStatus(200)
   console.log('get /payload')
-});
+})
 app.post('/payload', githubController.payload)
 
 
@@ -31,6 +32,6 @@ app.get('/devTest', async (req, res) => {
 
 app.listen('8080')
 
-console.log('Magic happens on http://localhost:8080');
+console.log('Magic happens on http://localhost:8080')
 
-exports = module.exports = app;
+exports = module.exports = app
