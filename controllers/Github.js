@@ -1,8 +1,9 @@
 const exec = require('child_process').exec
 
 exports.payload = (req, res) => {
-  const branch = res.body.ref.split('/')[2]
   try {
+    const branch = req.body.ref.split('/')[2]
+
     if (branch === 'master') {
       console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
       console.log('pulling code from GitHub...')
