@@ -19,6 +19,8 @@ exports.payload = (req, res) => {
       console.log('Installing production dependencies')
       exec('npm -C ~/Public/real-estate install --production', execCallback)
       console.log('Installed production dependencies')
+      console.log('Restart forever real-estate process')
+      exec('forever restart real-estate', execCallback)
     } else {
       console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
     }
