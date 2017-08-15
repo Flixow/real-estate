@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
-  res.send('It works now!')
+  res.send('It works in the internet!')
 })
 
 app.get('/scrape', adsController.get)
