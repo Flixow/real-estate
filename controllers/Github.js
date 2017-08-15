@@ -21,10 +21,13 @@ exports.payload = (req, res) => {
       console.log('Installed production dependencies')
       console.log('Restart forever real-estate process')
       exec('forever restart real-estate', execCallback)
+      res.sendStatus(200)
     } else {
       console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
+      res.sendStatus(400)
     }
   } catch (e) {
     console.log('error:', e)
+    res.sendStatus(400)
   }
 }
