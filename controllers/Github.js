@@ -20,7 +20,7 @@ exports.payload = (req, res) => {
       exec('npm -C ~/Public/real-estate install --production', execCallback)
       console.log('Installed production dependencies')
       console.log('Restart forever real-estate process')
-      exec('forever restart real-estate', execCallback)
+      exec('forever -C ~/Public/real-estate restart real-estate', execCallback)
       res.sendStatus(200)
     } else {
       console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
