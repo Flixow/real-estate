@@ -16,9 +16,8 @@ exports.payload = (req, res) => {
       exec('git -C ~/Public/real-estate reset --hard', execCallback)
       exec('git -C ~/Public/real-estate clean -df', execCallback)
       exec('git -C ~/Public/real-estate pull -f', execCallback)
-      exec('yarn -C ~/Public/real-estate install --production', execCallback)
       console.log('Installing production dependencies')
-      exec('yarn -C ~/Public/real-estate install start', execCallback)
+      exec('npm -C ~/Public/real-estate install --production', execCallback)
       console.log('Installed production dependencies')
     } else {
       console.log(`${req.body.pusher.name} just pushed to ${req.body.repository.name} on branch ${branch}`)
