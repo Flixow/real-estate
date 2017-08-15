@@ -14,7 +14,7 @@ exports.payload = (req, res) => {
       }
 
       exec('git -C ~/Public/real-estate fetch origin master', execCallback)
-      exec('git -C ~/Public/real-estate reset --hard FETCH_HEAD', execCallback)
+      exec('git -C ~/Public/real-estate reset --hard origin/master', execCallback)
       exec('git -C ~/Public/real-estate clean -df', execCallback)
       console.log('Installing production dependencies')
       exec('npm -C ~/Public/real-estate install --production', execCallback)
