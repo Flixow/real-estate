@@ -1,11 +1,13 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-
 const scrapeIt = require('scrape-it')
+const morgan = require('morgan')
+
 const adsController = require('./controllers/Ads')
 const githubController = require('./controllers/Github')
 
+app.use(morgan('combined'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
